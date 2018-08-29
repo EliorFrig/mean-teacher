@@ -79,6 +79,18 @@ class TransformTwice:
         return out1, out2
 
 
+class TransformFourTimes:
+    def __init__(self, transform):
+        self.transform = transform
+
+    def __call__(self, inp):
+        out1 = self.transform(inp)
+        out2 = self.transform(inp)
+        out3 = self.transform(inp)
+        out4 = self.transform(inp)
+        return out1, out2, out3, out4
+
+
 def relabel_dataset(dataset, labels):
     unlabeled_idxs = []
     for idx in range(len(dataset.imgs)):

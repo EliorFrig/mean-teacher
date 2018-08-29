@@ -33,7 +33,7 @@ def create_parser():
     parser.add_argument('--exclude-unlabeled', default=False, type=str2bool, metavar='BOOL',
                         help='exclude unlabeled examples from the training set')
     parser.add_argument('--arch', '-a', metavar='ARCH', default='resnet18',
-                        choices=architectures.__all__,
+                        nargs='+', choices=architectures.__all__,
                         help='model architecture: ' +
                             ' | '.join(architectures.__all__))
     parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
@@ -83,6 +83,13 @@ def create_parser():
                         help='evaluate model on evaluation set')
     parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                         help='use pre-trained model')
+    parser.add_argument('--seed', default=1, type=int, metavar='S', help='random seed (default: 1)')
+
+    # SWA
+    parser.add_argument('--swa', action='store_true', help='use swa')
+    parser.add_argument('--swa-start', default=61, type=int, metavar='N', help='SWA start epoch number (default: 61)')
+    parser.add_argument('--swa-lr', default=0.05, type=float, metavar='LR', help='Max SWA LR (default: 0.05)')
+    parser.add_argument('--swa-cycle', default=3, type=int, metavar='N', help='SWA cycle length in epochs (default: 3)')
     return parser
 
 

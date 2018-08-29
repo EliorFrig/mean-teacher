@@ -15,7 +15,8 @@ from .utils import export
 def imagenet():
     channel_stats = dict(mean=[0.485, 0.456, 0.406],
                          std=[0.229, 0.224, 0.225])
-    train_transformation = data.TransformTwice(transforms.Compose([
+    #train_transformation = data.TransformTwice(transforms.Compose([
+    train_transformation = data.TransformFourTimes(transforms.Compose([
         transforms.RandomRotation(10),
         transforms.RandomResizedCrop(224),
         transforms.RandomHorizontalFlip(),
@@ -42,7 +43,8 @@ def imagenet():
 def cifar10():
     channel_stats = dict(mean=[0.4914, 0.4822, 0.4465],
                          std=[0.2470,  0.2435,  0.2616])
-    train_transformation = data.TransformTwice(transforms.Compose([
+    #train_transformation = data.TransformTwice(transforms.Compose([
+    train_transformation = data.TransformFourTimes(transforms.Compose([
         data.RandomTranslateWithReflect(4),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
